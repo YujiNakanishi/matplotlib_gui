@@ -1,3 +1,16 @@
+"""
+GUI for drawing graph by matplotlib.
+
+# How to use.
+---Just importing matplotlib_gui---
+
+For instance, you command "import matplotlib_gui" on command prompt.
+>>>python
+>>>import matplotlib_gui
+
+Then, GUI window will be created!
+"""
+
 import tkinter as tk
 import matplotlib
 matplotlib.use("TkAgg")
@@ -17,11 +30,17 @@ class Application(tk.Frame):
         self.Datasets = None
         createMenu(self)
 
-
+    """
+    functions for "Graph" menu bar.
+    If you want to add a new function, please add it here and "Graph_Menu.py"
+    """
     def sketch(self): Graph_Menu.sketch(self)
     def save(self): Graph_Menu._save(self)
 
-
+    """
+    functions for "Plot" menu bar.
+    If you want to add a new function, please add it here and "Plot.py"
+    """
     def Plot_create(self): Plot._create(self)
     def Plot_setData(self): Plot._setData(self)
     def Plot_deleteData(self): Plot._deleteData(self)
@@ -30,7 +49,10 @@ class Application(tk.Frame):
     def Plot_import(self): Plot._import(self)
     def Plot_fillimport(self): Plot._fillimport(self)
 
-
+    """
+    functions for "Hist" menu bar.
+    If you want to add a new function, please add it here and "Hist.py"
+    """
     def Hist_create(self): Hist._create(self)
     def Hist_setData(self): Hist._setData(self)
     def Hist_deleteData(self): Hist._deleteData(self)
