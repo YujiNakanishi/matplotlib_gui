@@ -208,7 +208,21 @@ def _deleteData(app):
     app.Datasets = new_Datasets
 
 def _updateStyle(app):
-    pass
+    data_name = app.data_combobox.get()
+
+    for dataset in app.Datasets:
+        if dataset["name"] == data_name:
+            dataset["linetype"] = app.linetype_combobox.get()
+            dataset["linecolor"] = app.linecolor_combobox.get()
+            dataset["markertype"] = app.markertype_combobox.get()
+            dataset["linewidth"] = float(app.linewidth_text.get())
+            dataset["alpha"] = float(app.alpha_text.get())
+            dataset["markersize"] = float(app.markersize_text.get())
+            dataset["markercolor"] = app.markercolor_combobox.get()
+            dataset["markeredgecolor"] = app.markeredgecolor_combobox.get()
+            dataset["markeredgewidth"] = float(app.markeredgewidth_text.get())
+            
+            break
 
 
 def export_Range(string):
