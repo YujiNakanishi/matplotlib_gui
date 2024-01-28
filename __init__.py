@@ -5,8 +5,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from matplotlib_gui import Graph_Menu
-
-__version__ = 1.0
+from matplotlib_gui import Plot
 
 class Application(tk.Frame):
     def __init__(self, master):
@@ -17,8 +16,13 @@ class Application(tk.Frame):
         self.Datasets = None
         createMenu(self)
 
+
     def sketch(self): Graph_Menu.sketch(self)
     def save(self): Graph_Menu._save(self)
+
+
+    def Plot_create(self): Plot._create(self)
+    def Plot_setData(self): Plot._setData(self)
 
 def createMenu(app):
     menubar = tk.Menu(app)
@@ -28,5 +32,10 @@ def createMenu(app):
     Graph_menu.add_command(label = "sketch", command = app.sketch)
     Graph_menu.add_command(label = "save image", command = app.save)
     menubar.add_cascade(label = "Graph", menu = Graph_menu)
+
+
+    Plot_menu = tk.Menu(menubar, tearoff = False)
+    Plot_menu.add_command(label = "create", command = app.Plot_create)
+    menubar.add_cascade(label = "Plot", menu = Plot_menu)
 
 root = tk.Tk(); app = Application(root)
