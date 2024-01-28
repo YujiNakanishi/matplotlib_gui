@@ -23,6 +23,9 @@ class Application(tk.Frame):
 
     def Plot_create(self): Plot._create(self)
     def Plot_setData(self): Plot._setData(self)
+    def Plot_deleteData(self): Plot._deleteData(self)
+    def Plot_updateStyle(self): Plot._updateStyle(self)
+    def Plot_draw(self): Plot._draw(self)
 
 def createMenu(app):
     menubar = tk.Menu(app)

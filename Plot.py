@@ -193,7 +193,19 @@ def _setData(app):
             break
 
 def _deleteData(app):
-    pass
+    data_name = app.data_combobox.get()
+    app.data_combobox.set("")
+
+    app.datalist.remove(data_name)
+    app.data_combobox["values"] = app.datalist
+
+    new_Datasets = []
+
+    for dataset in app.Datasets:
+        if dataset["name"] != data_name:
+            new_Datasets.append(dataset)
+
+    app.Datasets = new_Datasets
 
 def _updateStyle(app):
     pass
