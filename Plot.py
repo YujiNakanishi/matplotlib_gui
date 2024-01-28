@@ -305,6 +305,25 @@ def _draw(app):
     app.canvas = FigureCanvasTkAgg(app.figure, app.graph_window)
     app.canvas.get_tk_widget().place(relx = 0.0, rely = 0.0)
 
+def return_Dataset(X, Y, name, dtype = None):
+    dataset = {
+    "type" : dtype,
+    "name" : name,
+    "X" : X,
+    "Y" : Y,
+    "linetype" : "solid",
+    "linecolor" : "black",
+    "linewidth" : 1,
+    "markertype" : "None",
+    "markersize" : 1,
+    "markercolor" : "black",
+    "markeredgewidth" : "1",
+    "markeredgecolor" : "black",
+    "alpha" : 1.0
+    }
+
+    return dataset
+
 def _import(app):
     window = tk.Toplevel(app)
     window.title("Import data")
