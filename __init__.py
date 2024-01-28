@@ -40,6 +40,7 @@ def createMenu(app):
 
     Plot_menu = tk.Menu(menubar, tearoff = False)
     Plot_menu.add_command(label = "create", command = app.Plot_create)
+    Plot_menu.add_command(label = "import", command = app.Plot_import)
     menubar.add_cascade(label = "Plot", menu = Plot_menu)
 
 root = tk.Tk(); app = Application(root)
