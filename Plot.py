@@ -304,3 +304,44 @@ def _draw(app):
     app.plot.grid((app.grid_button.get() == 2), which = "major", axis = "both")
     app.canvas = FigureCanvasTkAgg(app.figure, app.graph_window)
     app.canvas.get_tk_widget().place(relx = 0.0, rely = 0.0)
+
+def _import(app):
+    window = tk.Toplevel(app)
+    window.title("Import data")
+    window.geometry("400x450")
+    x = tk.Label(window, text = "X", font = ("", 10, "bold"), fg = "navy")
+    y = tk.Label(window, text = "Y", font = ("", 10, "bold"), fg = "navy")
+    Name = tk.Label(window, text = "Name", font = ("", 10, "bold"), fg = "navy")
+    x.place(relx = 0.1, rely = 0.05)
+    y.place(relx = 0.6, rely = 0.05)
+    Name.place(relx = 0.1, rely = 0.8)
+
+    x_text = tk.Text(window, width = 15, height = 20)
+    y_text = tk.Text(window, width = 15, height = 20)
+    Name_text = tk.Entry(window)
+    x_text.place(relx = 0.1, rely = 0.1)
+    y_text.place(relx = 0.6, rely = 0.1)
+    Name_text.place(relx = 0.23, rely = 0.8)
+
+    def Import_Button():
+        x_data = x_text.get("1.0", "end-1c")
+        x_data = x_data.split("\n")
+        x_data = np.array(x_data).astype(float)
+        y_data = y_text.get("1.0", "end-1c")
+        y_data = y_data.split("\n")
+        y_data = np.array(y_data).astype(float)
+        name = Name_text.get()
+
+        dataset = return_Dataset(x_data, y_data, name)
+        if app.Datasets is None:
+            app.Datasets = [dataset]
+        else:
+            app.Datasets.append(dataset)
+
+        app.datalist.append(name)
+        app.data_combobox["values"] = app.datalist
+
+        window.destroy()
+
+    import_button = tk.Button(window, text = "Import", command = Import_Button)
+    import_button.place(relx = 0.8, rely = 0.8)
