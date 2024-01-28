@@ -173,7 +173,24 @@ def _create(app):
 
 
 def _setData(app):
-    pass
+    data_name = app.data_combobox.get()
+    for datasets in app.Datasets:
+        if data_name == datasets["name"]:
+            app.linetype_combobox.set(datasets["linetype"])
+            app.linecolor_combobox.set(datasets["linecolor"])
+            app.markertype_combobox.set(datasets["markertype"])
+            app.linewidth_text.delete(0, tk.END)
+            app.linewidth_text.insert(tk.END, datasets["linewidth"])
+            app.markersize_text.delete(0, tk.END)
+            app.markersize_text.insert(tk.END, datasets["markersize"])
+            app.alpha_text.delete(0, tk.END)
+            app.alpha_text.insert(tk.END, datasets["alpha"])
+            app.markercolor_combobox.set(datasets["markercolor"])
+            app.markeredgecolor_combobox.set(datasets["markeredgecolor"])
+            app.markeredgewidth_text.delete(0, tk.END)
+            app.markeredgewidth_text.insert(tk.END, datasets["markeredgewidth"])
+
+            break
 
 def _deleteData(app):
     pass
