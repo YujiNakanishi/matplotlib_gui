@@ -33,6 +33,23 @@ def sketch(app):
         app.canvas.get_tk_widget().place(relx = 0.0, rely = 0.0)
 
         window.destroy()
-    
+
     save_button = tk.Button(window, text = "Sketch", command = save_Button)
+    save_button.place(relx = 0.8, rely = 0.7)
+
+def _save(app):
+    window = tk.Toplevel(app)
+    window.title("Save image")
+    window.geometry("250x100")
+
+    filename = tk.Label(window, text = "File name", font = ("", 10, "bold"), fg = "navy")
+    filename.place(relx = 0., rely = 0.05)
+    Name_text = tk.Entry(window)
+    Name_text.place(relx = 0.1, rely = 0.4)
+
+    def save_Button():
+        app.figure.savefig(Name_text.get())
+        window.destroy()
+
+    save_button = tk.Button(window, text = "Save", command = save_Button)
     save_button.place(relx = 0.8, rely = 0.7)

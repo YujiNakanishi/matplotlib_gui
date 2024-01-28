@@ -18,6 +18,7 @@ class Application(tk.Frame):
         createMenu(self)
 
     def sketch(self): Graph_Menu.sketch(self)
+    def save(self): Graph_Menu._save(self)
 
 def createMenu(app):
     menubar = tk.Menu(app)
@@ -25,6 +26,7 @@ def createMenu(app):
 
     Graph_menu = tk.Menu(menubar, tearoff = False)
     Graph_menu.add_command(label = "sketch", command = app.sketch)
+    Graph_menu.add_command(label = "save image", command = app.save)
     menubar.add_cascade(label = "Graph", menu = Graph_menu)
 
 root = tk.Tk(); app = Application(root)
