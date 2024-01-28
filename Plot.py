@@ -181,5 +181,83 @@ def _deleteData(app):
 def _updateStyle(app):
     pass
 
+
+def export_Range(string):
+    string = string[1:-1]
+    string = string.split(",")
+    string = np.array(string).astype(float)
+
+    return string
+
 def _draw(app):
-    pass
+    app.plot.cla()
+
+    if app.legend_button.get() == 1:
+        for dataset in app.Datasets:
+            if dataset["type"] == "fill_import":
+                app.plot.fill_between(dataset["X"], dataset["Y"][0], dataset["Y"][1], 
+                color = dataset["linecolor"],
+                alpha = dataset["alpha"])
+            else:
+                app.plot.plot(dataset["X"], dataset["Y"], 
+                linestyle = dataset["linetype"],
+                color = dataset["linecolor"],
+                marker = dataset["markertype"],
+                markersize = dataset["markersize"],
+                markerfacecolor = dataset["markercolor"],
+                markeredgecolor = dataset["markeredgecolor"],
+                markeredgewidth = dataset["markeredgewidth"],
+                linewidth = dataset["linewidth"],
+                alpha = dataset["alpha"])
+    else:
+        for dataset in app.Datasets:
+            if dataset["type"] == "fill_import":
+                app.plot.fill_between(dataset["X"], dataset["Y"][0], dataset["Y"][1], 
+                color = dataset["linecolor"],
+                alpha = dataset["alpha"],
+                label = dataset["name"])
+            else:
+                app.plot.plot(dataset["X"], dataset["Y"], 
+                linestyle = dataset["linetype"],
+                color = dataset["linecolor"],
+                marker = dataset["markertype"],
+                markersize = dataset["markersize"],
+                markerfacecolor = dataset["markercolor"],
+                markeredgecolor = dataset["markeredgecolor"],
+                markeredgewidth = dataset["markeredgewidth"],
+                linewidth = dataset["linewidth"],
+                alpha = dataset["alpha"],
+                label = dataset["name"])
+
+        app.plot.legend(loc = "best")
+
+    x_range = app.xrange_text.get()
+    if x_range != "":
+        x_range = export_Range(x_range) #np配列。
+        app.plot.set_xlim(x_range[0], x_range[1])
+
+    y_range = app.yrange_text.get()
+    if y_range != "":
+        y_range = export_Range(y_range) #np配列。
+        app.plot.set_ylim(y_range[0], y_range[1])
+	
+    app.plot.set_xlabel(app.x_label_text.get(), fontsize = 12)
+    app.plot.set_ylabel(app.y_label_text.get(), fontsize = 12)
+
+    log = app.log_combobox.get()
+    if log == "X":
+        app.plot.set_xscale("log")
+        app.plot.set_yscale("linear")
+    elif log == "Y":
+        app.plot.set_xscale("linear")
+        app.plot.set_yscale("log")
+    elif log == "All":
+        app.plot.set_xscale("log")
+        app.plot.set_yscale("log")
+    else:
+        app.plot.set_xscale("linear")
+        app.plot.set_yscale("linear")
+
+    app.plot.grid((app.grid_button.get() == 2), which = "major", axis = "both")
+    app.canvas = FigureCanvasTkAgg(app.figure, app.graph_window)
+    app.canvas.get_tk_widget().place(relx = 0.0, rely = 0.0)
