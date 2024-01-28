@@ -364,3 +364,52 @@ def _import(app):
 
     import_button = tk.Button(window, text = "Import", command = Import_Button)
     import_button.place(relx = 0.8, rely = 0.8)
+
+def _fillimport(app):
+    window = tk.Toplevel(app)
+    window.title("Import data")
+    window.geometry("600x450")
+    x = tk.Label(window, text = "X", font = ("", 10, "bold"), fg = "navy")
+    bottom = tk.Label(window, text = "bottom", font = ("", 10, "bold"), fg = "navy")
+    top = tk.Label(window, text = "top", font = ("", 10, "bold"), fg = "navy")
+    Name = tk.Label(window, text = "Name", font = ("", 10, "bold"), fg = "navy")
+    x.place(relx = 0.1, rely = 0.05)
+    bottom.place(relx = 0.4, rely = 0.05)
+    top.place(relx = 0.7, rely = 0.05)
+    Name.place(relx = 0.1, rely = 0.8)
+
+    x_text = tk.Text(window, width = 15, height = 20)
+    bottom_text = tk.Text(window, width = 15, height = 20)
+    top_text = tk.Text(window, width = 15, height = 20)
+    Name_text = tk.Entry(window)
+    x_text.place(relx = 0.1, rely = 0.1)
+    bottom_text.place(relx = 0.4, rely = 0.1)
+    top_text.place(relx = 0.7, rely = 0.1)
+    Name_text.place(relx = 0.23, rely = 0.8)
+
+    def Import_Button():
+        x_data = x_text.get("1.0", "end-1c")
+        x_data = x_data.split("\n")
+        x_data = np.array(x_data).astype(float)
+        bottom_data = bottom_text.get("1.0", "end-1c")
+        bottom_data = bottom_data.split("\n")
+        bottom_data = np.array(bottom_data).astype(float)
+        top_data = top_text.get("1.0", "end-1c")
+        top_data = top_data.split("\n")
+        top_data = np.array(top_data).astype(float)
+
+        name = Name_text.get()
+
+        dataset = return_Dataset(x_data, [bottom_data, top_data], name, dtype = "fill_import")
+        if app.Datasets is None:
+            app.Datasets = [dataset]
+        else:
+            app.Datasets.append(dataset)
+
+        app.datalist.append(name)
+        app.data_combobox["values"] = app.datalist
+
+        window.destroy()
+
+    import_button = tk.Button(window, text = "Import", command = Import_Button)
+    import_button.place(relx = 0.8, rely = 0.8)

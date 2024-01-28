@@ -10,7 +10,7 @@ from matplotlib_gui import Plot
 class Application(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
-        master.title("graf")
+        master.title("matplotlib_gui")
         master.geometry("640x0")
         self.pack()
         self.Datasets = None
@@ -27,6 +27,7 @@ class Application(tk.Frame):
     def Plot_updateStyle(self): Plot._updateStyle(self)
     def Plot_draw(self): Plot._draw(self)
     def Plot_import(self): Plot._import(self)
+    def Plot_fillimport(self): Plot._fillimport(self)
 
 def createMenu(app):
     menubar = tk.Menu(app)
@@ -41,6 +42,7 @@ def createMenu(app):
     Plot_menu = tk.Menu(menubar, tearoff = False)
     Plot_menu.add_command(label = "create", command = app.Plot_create)
     Plot_menu.add_command(label = "import", command = app.Plot_import)
+    Plot_menu.add_command(label = "fill import", command = app.Plot_fillimport)
     menubar.add_cascade(label = "Plot", menu = Plot_menu)
 
 root = tk.Tk(); app = Application(root)
